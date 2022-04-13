@@ -1,17 +1,17 @@
 import pandas as pd
 import streamlit as st
 
-st.write("""
-# My first app
-# Hello *world!*
-# """)
-num = 0
+st.title('Hello World')
+if 'count' not in st.session_state:
+	st.session_state.count = 0
 
-if st.button('Click this'):
-    num += 1
-    st.write(num)
+def increment_counter(increment_value=0):
+	st.session_state.count += increment_value
 
-path1 = '/Users/claywrentz/Desktop/ML-Fontenot/MLProject2/Dataset1/train.xlsx' 
-flight1 = pd.read_excel(path1)
+def decrement_counter(decrement_value=0):
+	st.session_state.count -= decrement_value
 
-st.line_chart(data=flight1['Price'], width=0, height=0, use_container_width=True)
+st.button('click me', on_click=increment_counter, kwargs=dict(increment_value=1))
+st.button('dont click me', on_click=decrement_counter, kwargs=dict(decrement_value=1))
+
+st.write(st.session_state.count)
