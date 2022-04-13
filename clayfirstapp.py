@@ -29,4 +29,5 @@ st.write('Comments: ')
 if comments_list:
 	for x in comments_list:
 		st.write(x)
+		st.write('\n')
 
