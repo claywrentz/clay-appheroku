@@ -16,10 +16,14 @@ st.button('dont click me', on_click=decrement_counter, kwargs=dict(decrement_val
 
 st.write(st.session_state.count)
 
-user_input = st.text_area("Leave a comment!")
-file1 = open("comments.txt", "a")
-file1.write(user_input)
-file1.close()
+form = st.form(key='my-form')
+name = form.text_input('Leave a comment!')
+submit = form.form_submit_button('Submit')
+
+if submit:
+	file1 = open("comments.txt", "a")
+	file1.write(name + "\n")
+	file1.close()
 
 file1 = open("comments.txt", "r")
 comments_list = file1.readlines()
@@ -28,5 +32,6 @@ st.write('Comments: ')
 
 if comments_list:
 	for x in comments_list:
-		st.text(x)
+		st.write(x)
+
 
